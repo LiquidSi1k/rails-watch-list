@@ -1,0 +1,10 @@
+<h1 class="container text-center pt-5">Add Movie to your <%= @list.name %> list</h1>
+
+<div class="container w-50">
+<%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.input :comment %>
+        <%= f.association :movie, collection: Movie.all, prompt: "Select a movie" %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+<%= link_to "return", lists_path %>
+</div>
