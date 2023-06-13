@@ -11,20 +11,26 @@
   <p>classic</p>
   </div>
     <hr>
+      <h3 class="container">My Lists</h3>
+    <div class="container d-flex">
+      <%= link_to "Add a movie", new_list_bookmark_path(@list, @bookmark)%> | <p>Viewings</p>
+    </div>
 <div class="container d-flex justify-content-between p-3">
   <div>
-    <h3>My Lists</h3>
-      <div class="d-flex text-center">
-          <ul>
-            <% @list.movies.each do |item| %>
-              <div class="w-25">
-              <img src="<%= item.poster_url %>" alt="movie-image" class="w-75">
-              <li style="list-style-type: none;"><%= item.title %></li>
-              <p> <%= item.overview %> </p>
-              </div>
-            <% end %>
-          </ul>
-      </div>
+    <div class="text-center">
+        <ul class="d-flex">
+          <% @list.bookmarks.each do |bookmark| %>
+            <div class="w-25">
+            <img src="<%= bookmark.movie.poster_url %>" alt="movie-image" class="w-75">
+            <p style="list-style-type: none;"><%= bookmark.movie.title %></p>
+            <p> <%= bookmark.movie.overview %> </p>
+              <%= link_to "Delete",
+                bookmark_path(bookmark),
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+              %>
+            </div>
+          <% end %>
+        </ul>
+    </div>
   </div>
-    <%= link_to "Add a movie", new_list_bookmark_path(@list, @bookmark)%>
 </div>
